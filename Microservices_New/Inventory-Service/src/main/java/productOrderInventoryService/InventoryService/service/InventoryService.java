@@ -21,10 +21,9 @@ public class InventoryService {
     @SneakyThrows
     public List<InventoryResponse> isInStock(List<String> skucode) {
         log.info("Checking Inventory");
-        return inventoryRepository.findByskucode(skucode.toString()).stream().map(
-                inventory -> InventoryResponse.builder().skuCode(inventory.getSkucode())
+        return inventoryRepository.findByskucode(skucode.toString()).stream()
+                .map(inventory -> InventoryResponse.builder().skucode(inventory.getSkucode())
                         .isInStock(inventory.getQuantity()>0)
-                        .build()
-        ).toList();
+                        .build()).toList();
     }
 }
